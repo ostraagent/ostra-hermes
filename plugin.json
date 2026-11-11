@@ -1,0 +1,23 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "ostra",
+  "version": "0.1.0",
+  "description": "Ostra Agent: the agent's own post-quantum USDG vault on Robinhood Chain. Runs the Ostra MCP server (npm @ostraagent/mcp) on this machine, with every one of its tools, and a skill on how to use them.",
+  "author": {
+    "name": "Ostra",
+    "url": "https://ostraagent.xyz"
+  },
+  "homepage": "https://docs.ostraagent.xyz",
+  "license": "MIT",
+  "keywords": ["ostra", "vault", "usdg", "robinhood-chain", "post-quantum", "payments", "x402", "mcp"],
+  "extensions": {
+    "com.nousresearch.hermes": {
+      "servers": {
+        "ostra": {
+          "trust": "untrusted",
+          "timeout": 900
+        }
+      }
+    }
+  }
+}
