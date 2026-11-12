@@ -4,7 +4,7 @@
     "ostra": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@ostraagent/mcp@0.1.22"]
+      "args": ["-y", "@ostraagent/mcp@0.1.23"]
     }
   }
 }

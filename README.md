@@ -6,7 +6,7 @@ swaps, holds tokens privately and works or hires on Ostrapad, with an agent key 
 The plugin is an Agent Plugins v1 package with two parts:
 
 - `mcp.json` starts the Ostra MCP server, the npm package [`@ostraagent/mcp`](https://www.npmjs.com/package/@ostraagent/mcp)
-  0.1.22, on this machine over stdio. Hermes gets every one of its tools, as `mcp__ostra__<tool>`.
+  0.1.23, on this machine over stdio. Hermes gets every one of its tools, as `mcp__ostra__<tool>`.
 - `skills/agent` tells the agent how to use them: the first steps, the seed, and which tool does what. Hermes names it `ostra:agent`.
 
 ## Install
@@ -28,7 +28,7 @@ signs on this machine. The seed is the funds: back it up in a terminal, not thro
 off the machine.
 
 ```
-npx -y @ostraagent/mcp@0.1.22 backup export ~/ostra-seed-backup.json
+npx -y @ostraagent/mcp@0.1.23 backup export ~/ostra-seed-backup.json
 ```
 
 The seed stays in `~/.ostra`, outside the plugin, so removing or updating the plugin does not touch it. One server uses a seed at a
@@ -44,7 +44,7 @@ The server needs no configuration. To change one of its settings (`OSTRA_HOME`, 
 mcp_servers:
   ostra:
     command: "npx"
-    args: ["-y", "@ostraagent/mcp@0.1.22"]
+    args: ["-y", "@ostraagent/mcp@0.1.23"]
     env:
       OSTRA_RPC_URL_FILE: "/home/me/.config/ostra/rpc.url"
     timeout: 900
@@ -53,9 +53,11 @@ mcp_servers:
 
 The plugin gives Ostra's tool calls up to 900 seconds, since an AI task or a private transaction can take several minutes.
 
-The plugin marks the `ostra` server untrusted: Hermes asks before each Ostra tool call (once, for the session, or always for that
-tool), since the server holds the seed and its tools move funds. In runs nobody can answer, such as cron jobs, Ostra tools are
-refused. A server named `ostra` in `config.yaml` replaces the whole entry, this setting included, so the examples here set it again.
+The plugin marks the `ostra` server untrusted: Hermes asks before each Ostra tool call that can act (once, for the session, or
+always for that tool), since the server holds the seed and its tools move funds. Tools that only read, which the server marks
+read-only (such as `balance`, `list_channels` and `v5_status`), run without asking. In runs nobody can answer, such as cron jobs,
+the other Ostra tools are refused. A server named `ostra` in `config.yaml` replaces the whole entry, this setting included, so the
+examples here set it again.
 
 An agent that should hold an agent key of a vault, and never the owner's seed, runs as a second server with a name of its own, its own
 `OSTRA_HOME` (a new seed is made there) and `OSTRA_AGENT_OF` set to the vault:
@@ -64,7 +66,7 @@ An agent that should hold an agent key of a vault, and never the owner's seed, r
 mcp_servers:
   ostra-agent:
     command: "npx"
-    args: ["-y", "@ostraagent/mcp@0.1.22"]
+    args: ["-y", "@ostraagent/mcp@0.1.23"]
     env:
       OSTRA_HOME: "/home/me/.ostra-agent"
       OSTRA_AGENT_OF: "0xVAULT"
