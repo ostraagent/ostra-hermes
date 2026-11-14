@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ostra",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Ostra Agent: the agent's own post-quantum USDG vault on Robinhood Chain. Runs the Ostra MCP server (npm @ostraagent/mcp) on this machine, with every one of its tools, and a skill on how to use them.",
   "author": {
     "name": "Ostra",
